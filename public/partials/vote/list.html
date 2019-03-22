@@ -1,0 +1,50 @@
+
+<a href='#/addVote' class='btn btn-{{className}}' style='width:100%;'>Add Vote</a>
+<input type='text' class='form-control' ng-model="query" placeholder="search by title">
+
+<br>
+
+<ul>
+    <li class='artist cf' ng-repeat="item in votes |filter:query" >
+
+
+        <div id="vote-{{item.id}}" class="panel box box-{{className}} box-solid ">
+            <div class="box-header bg-primary with-border">
+<div>
+                <h3 class="box-title" >
+                    <a href='#/details/{{votes.indexOf(item)}}'>
+                        {{item.title}}
+                    </a>
+                </h3>
+
+
+                <div class='pull-right btn btn-danger btn-xs' ng-if="item.user_id==userId" ng-click='delete_vote(item.id)' >X</div>
+</div>
+            </div>
+
+            <div id="collapseOne" class="panel-collapse collapse in">
+                <div class="box-body">
+
+                    <div class="user-panel">
+                        <div class="pull-left image">
+                            <img src='{{path.image_path}}/{{item.profile_picture}}' class="pp-lg" style='width:60px;height:60px;'/>
+                        </div>
+                        <div class="pull-left info">
+                            <p class='black-text'>{{item.first_name}} {{item.last_name}} </p>
+
+                            <p class='black-text'><i class="fa  fa-clock-o text-success"></i> 
+                            <!-- {{ VoteController::voteTime(item.id)}} --></p>
+                        </div>
+                    </div>
+
+                    <blockquote>
+                        <p><div class='qContent' ng-bind-html="item.content | linky:'_blank' | limitTo:120 "></div>
+                        </p>
+                    </blockquote style='padding:0px;'>
+
+
+                </div>
+            </div>
+        </div>
+    </li>
+</ul>

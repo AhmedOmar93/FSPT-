@@ -1,0 +1,163 @@
+.chat-bottom{
+    position: fixed;
+}
+.main-sidebar{position:fixed;z-index: 5000;height: 100%;}
+.main-sidebar{//overflow-y: scroll;}
+
+
+
+              .main-header{position: fixed;width: 100%;z-index: 6000;}
+              .content-wrapper{margin-top: 50px;}
+
+              @media(max-width:768px){
+                  .content-wrapper{margin-top: 100px;}
+              }
+
+              .box-footer{min-height: 60px;}
+              .box{border:1px solid #ddd}
+              textarea{resize:none;}
+              .pp{width: 45px;height: 45px;border-radius: 50%;margin: 5px;}
+              .off_white{background: #efefef;}
+
+              #blackground,.offwhite_background{
+                  position:fixed;
+                  width:100%;
+                  height:100%;
+                  top:100%;
+                  left:0;
+
+                  //background-color:rgba(255,255,255,0.8);
+                  background-color:rgba(0,0,0,0.7);
+
+                  opacity:1;
+                  //visibility:hidden;
+                  z-index:9999;
+                  opacity: 0;
+
+              }
+              .offwhite_background{top:0;opacity: 1;display: none;}
+
+              #showimage{
+                  display:inline-block;
+                  position: relative;
+                  margin:auto auto;
+                  //top:20;
+                  border:0px solid;
+
+                  border-radius:3px 3px 3px 3px;
+                  background-color:black;
+                  //visibility:hidden;
+                  //box-shadow: 0px 0px 10px #000;
+                  box-shadow: 0px 0px 10px #fff;
+                  border:4px solid #fff;
+                  //border:2px solid #fff;
+                  //border-top:30px solid #dddddd; 
+                  max-width:100%;
+                  max-height:100%;
+                  //float: left;
+                  vertical-align: middle;
+                  z-index:3;
+
+              }
+
+              #showimage img{
+                  max-width:1000px;
+                  max-height:550px;
+                  padding:0px;
+
+              }
+
+
+              .cursor:hover{
+                  cursor:pointer;
+              }
+
+              #backk{
+                  position:fixed;
+                  width:30px;
+                  height:30px;
+                  top:100%;
+                  //right:0;
+                  background-color:#000;
+                  color:white;
+                  opacity:1;
+                  //visibility:hidden;
+                  border-radius:0px 0px 5px 5px;
+                  font-size:17px;
+                  text-align:center;
+                  font-family:arial;
+                  opacity:1;
+                  //padding:2px;
+                  opacity:1;
+                  //text-shadow: 2px 2px 1px rgba(255,0,0,0.5);
+                  z-index:9999999999;
+                  border-radius: 50%;
+                  font-weight: bolder;
+                  border:3px solid #fff;
+                  cursor: pointer;
+              }
+
+              #backk:hover{
+                  background-color:red;
+
+                  cursor:pointer;
+                  opacity:1;
+                  box-shadow: 0px 0px 10px #ccc;
+                  /*
+                  background-color:black;
+                  color:red;
+                  */
+              }
+
+              .fixed{
+                  position:fixed;
+              }
+
+              #GoToUpButton{
+                  position: fixed;
+                  bottom: 20px;
+                  right: 20px;
+                  z-index: 999;
+                  display: none;
+                  font-weight: bold;
+              }
+
+
+              #GoToUpButton:hover{
+                  // box-shadow: 0px 0px 7px #555;
+                  //    background: #fff;
+                  //   color: #000;
+              }
+
+
+              .center_box{
+                  position: fixed;
+                  z-index: 999999999;
+                  left:0px;
+                  top:0px;
+                  background: #fff; 
+                  padding:0px;
+                  display: none;
+                  border-radius: 4px;
+              }
+              .qContent{white-space: pre;}
+
+              .introjs-helperLayer {
+                  background-color: transparent;
+                  left:-15px;
+              } 
+
+              .sidebar-menu li a{font-weight: 500;font-size: 16px;}
+              .box.box-solid.box-default>.box-header{
+                  background-color: #605ca8;
+                  color: #fff;
+
+              } 
+              .box.box-solid.box-default{border-color:#605ca8;}
+              .box.box-default{border-top-color: #605ca8;}
+              .btn-default2{
+                  background-color: #f4f4f4;
+                  color: #444;
+                  border-color: #ddd;
+              }
+

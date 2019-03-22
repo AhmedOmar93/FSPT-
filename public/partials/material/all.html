@@ -1,0 +1,65 @@
+<style type="text/css">
+			#upload_progress{display: none;color:#3c8dbc;font:15px arial;}
+			#loading_bar{max-width: 100%;height: 15px;
+			// background-image:url('{{path_prefix}}img/brogressBar.png');
+			background:#3c8dbc;
+				width:00px;border-radius: 0px;}
+			#bar_content{padding:2px;border:1px solid #3c8dbc;max-width: 100%;
+				display:none ;border-radius: 0px;margin:0px;margin-left: 0px;}
+			.custom-box{border-left:1px solid {{color}};border-right:1px solid {{color}};border-bottom:2px solid {{color}};}
+
+			.desc{font-weight:600; font-size: 16px;direction: ltr;}
+			.uploaded_image{max-width: 100%;max-height: 400px;cursor:pointer;}
+			.box-footer{min-height: 0px;}
+			.qContent{font-size:17px;}
+			img{margin: 0px auto;}
+</style>
+<div class='box box-solid box-{{className}}'>
+
+	<div class="box-header">
+		<h3 class="box-title">Upload New</h3>
+	</div>
+	<div class='box-body'>
+		<form action="" method="post" name='uploadFileForm'  enctype='multipart/form-data' novalidate>	
+			<div class="input-group" style='width:100%;'>
+				<textarea class='form-control' style='resize:none' id='materialDesc' placeholder="Description"></textarea>
+			</div>
+			<div class="input-group">
+				<input type='file'  name='file[]' id='file'  multiple="multiple"  ng-model="uploadedFile" class='form-control' required="">
+				<div class="input-group-btn">
+					<input type='submit' value="Upload File" ng-click='upload_file($event)' class='btn btn-flat btn-{{className}}'>
+				</div>
+			</div>
+		</form>		
+	</div>
+	<div class="box-footer">
+		<div id='upload_progress'></div>
+		<div id='bar_content'><div id='loading_bar'></div></div>
+	</div>
+</div>
+
+<div id='uploaded'></div>
+<div id='materials'>
+	<div ng-repeat="material in materials track by $index" class='box panel box-{{className}} custom-box' >
+
+	<div class="box-body">
+		<p class='qContent desc'> <div class='qContent' ng-bind-html="material.description | linky"></div></p>
+
+		<img onclick='view(this)'  class='uploaded_image' src="{{path_prefix}}files/{{material.file_name}}" ng-if="material.is_image"/>
+		<table class='table' border='0' ng-if="!material.is_image">
+			<tr>
+				<td style='width:20px;background:#efefef;'><img src='{{path_prefix}}img/file.png'></td>
+				<td>
+					<a ng-click="download($event)" href='{{path_prefix}}files/{{material.file_name}}' >{{material.real_name}}</a>
+					
+
+				</td>
+			</tr>
+			<tr><td colspan='2'>{{material.time}}</td></tr>
+
+		</table>
+	</div>	
+				
+	</div>
+
+</div>

@@ -1,0 +1,50 @@
+<a  href="#/VoteList" class='btn btn-{{myClass}}' style='width:100%;'>&laquo; Back to search</a>
+<br><br>
+
+<!--start -->
+
+
+
+
+<div  class="box box-{{myClass}} box-solid">
+    <div class="box-header">
+        <i class="fa fa-envelope"></i>
+        <h3 class="box-title">Add New Vote</h3>
+    </div>
+
+    <div class="box-body">
+        <form name='voteForm' id="form-add-vote"  novalidate>
+            <div class="form-group">
+                <input type='text' class="form-control"  name='vTitle' ng-model='vote.title' required="" placeholder="Vote Title"/>
+                <div ng-show="form.$submitted || form.vTitle.$touched">
+                    <div class='alert alert-danger' ng-show="form.vTitle.$error.required">Write Vote Title</div>
+                </div>
+            </div>
+
+            <div>
+                <textarea class="textarea" placeholder="Vote Body" name='vcontent' ng-model='vote.content' style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"  required=""></textarea>
+                <div ng-show="form.$submitted || form.vcontent.$touched">
+                    <div class='alert alert-danger' ng-show="form.vcontent.$error.required">Write Vote Body</div>
+                </div>
+            </div>
+
+            <br>
+            <hr>
+
+            <div  data-ng-repeat="c in choices">
+
+                <div class="form-group">
+                        <span class="input-group-addon">
+                          <input type="text" ng-model="c.name"  class="form-control" placeholder="Enter Choice">
+                        </span>
+                </div>
+                <button class="btn btn-{{myClass}}" ng-show="showAddChoice(c)" ng-click="addNewChoice()">Add another choice</button>
+            </div>
+
+            <div class="box-footer clearfix">
+                <button type='submit' ng-click='add_vote(vote,voteForm)' class="pull-right btn btn-{{myClass}}" >Add Vote <i class="fa fa-arrow-circle-right "></i></button>
+            </div>
+        </form>
+    </div>
+
+</div>

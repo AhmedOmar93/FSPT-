@@ -1,0 +1,129 @@
+.main{width:580px;margin: 0px auto;}
+
+body{background:#ccc; }
+.alert-box{ //background: red;}
+
+*{margin: 0px;padding:0px;}
+
+html{font-family: arial;}
+.panel{word-wrap:break-word;}
+
+#content{width:980px;border:0px solid red;}
+
+.menue{position:fixed;width:200px;height:650px;top:0px;left:0px;display:inline-table;background:#303335;
+height: 100%;overflow: scroll;color:#fff;
+}
+
+.profile_content{width:965px;height:100%;background:#ddd;margin-left: 200px;overflow: scroll;overflow-x:hidden;}
+
+
+.menue img{position:relative;border:0px solid #ddd;width:100px;height:100px;
+	border-radius: 50%;margin-top: 15px;margin-bottom: 15px;}
+
+.label{color:#fff;padding:5px;padding-bottom:10px;font-size: 18px;display: block;border-bottom: 1px solid #222;}
+
+.header{background:#008CBA;padding: 15px 5px;}
+
+.post{border:0px solid #555;}
+.post > .header{border-radius: 4px 4px 0px 0px;border-bottom: 0px;}
+
+.post h1 a{color: #fff;margin-top: 10px;}
+.panel1{word-wrap:break-word;padding:7px;border-bottom: 1px solid #222;max-width: 190px;padding-top:10px;padding-bottom:10px;}
+.post{background: #fff;border-radius: 6px;width:700px;margin: 20px auto;}
+
+.post span{color:#000;width:300px;margin: 0px auto;}
+.post div{color:#000;margin: 0px auto;letter-spacing: 1px;padding:10px;display: inline-table;}
+
+.fixed{}
+
+
+.pp,.pp-sm,.pp-lg{width:53px;height:53px;margin:5px;border-radius: 5px;margin-top: 0px;
+border-radius:50%;
+}
+
+.pp-sm{width:40px;height:40px;
+margin-top: 4px;}
+.pp-lg{width:60px;height:60px;}
+
+.post table{margin-top: 10px;font-size: 17px;color:#000;}
+
+.friend_list{position: fixed;right:0px;top:0px;width:195px;height: 100%;background:#303335;overflow: scroll;overflow-x:hidden; }
+
+.friend_list table{color:#fff;font-size: 13px;}
+.friend img {border-radius: 50%;}
+.friend{border-bottom: 1px solid #222;margin-bottom: 5px;cursor: pointer;}
+
+.friend:hover{background: #008CBA;}
+
+
+/*
+::-webkit-scrollbar {  
+    width: 7px;  
+}  
+::-webkit-scrollbar-track {  
+    background-color: #303335;  
+    border-radius:0px;
+	padding-left: 2px;
+//	background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 255, .1) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .3) 50%, rgba(255, 255, 255, .3) 75%, transparent 75%, transparent);
+	border-radius: 4px;
+}
+  
+::-webkit-scrollbar-thumb {  
+    background-color: #008CBA;
+	//border-radius:5px;
+	width: 4px;
+	border-radius:4px; 
+	//background-image: -webkit-linear-gradient(-90deg, rgba(255, 255, 255, .7) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0.7) 75%, transparent 75%, transparent);
+//	background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 255, .1) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .3) 50%, rgba(255, 255, 255, .3) 75%, transparent 75%, transparent);
+
+}  
+*/
+ul{list-style: none;}
+
+
+.tag{color:#000;margin: 0px auto;letter-spacing: 1px;padding:10px;display: inline-table;margin:5px;position:relative;background:#008CBA;color: #fff;padding: 5px; border-radius: 4px;}
+.tags{width: 100%;}
+.tags div{margin:3px;}
+
+.comments > table{width:630px;background: #efefef;padding:5px;border:1px solid #fff;border-radius: 5px;
+margin: 0px auto;word-wrap:break-word;}
+
+//.answer > input{margin-bottom: 5px;background:#fff;margin: 0px auto;border-radius: 5px;}
+
+table{border:0px;background: transparent;margin:0px;}
+
+
+.delete{color: red;float: right;font-size: 20px;cursor: pointer;}
+
+.answer{border:1px solid #ccc;background: #fff;}
+
+.tab-pane{max-width: 900px;margin: 0px auto;min-height: 600px;}
+
+.post_cont{background:#fff;border: 1px solid #eee;}
+
+pre{background:transparent;}
+
+.pull_top_50{margin-top:-50px;}
+
+.pull-bottom-5{margin-bottom:5px;}
+.black-text{color:#000;}
+
+.tab-pane{padding:5px;box-shadow:0px 0px 0px #555;}
+
+.arrow{width:0px;height:0px;border:10px solid transparent;
+border-right-color:#3c8dbc;
+margin-left: -30px;
+}
+
+.solid{
+border-right-color:#337ab7;
+}
+
+.border-right-success{border-right-color:#00a65a;}
+.border-right-danger{border-right-color:#dd4b39;}
+.border-right-warning{border-right-color:#f39c12;}
+.border-right-primary{border-right-color:#3c8dbc;}
+.border-right-default{border-right-color:#605ca8;}
+
+.pull-right .btn{border-color:transparent;}
+

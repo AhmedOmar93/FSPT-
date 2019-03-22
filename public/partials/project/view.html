@@ -1,0 +1,212 @@
+<style type="text/css">
+    .box-title{cursor: pointer;}
+    textarea{min-height: 100px;}
+    #user_list tr td span{font-weight: bold;font-size: 15px;}
+    #user_list {//margin:10px 0px 10px 0px;
+                margin-left:15px;margin-top: 10px;}
+    #user_list td img{width: 35px;height: 35px;border-radius: 50%;}
+    .done,#TaskBox{background:#efefef;color:#000;padding:5px; font-weight: bolder;border-top-width: 3px;}
+    #TaskBox .box-title{color:#000; font-weight:800;font-size: 17px;}
+    #TaskBox .box-footer{color: #000;;min-height: 20px;background: #ddd;}
+    .box{border-top-width: 3px;}
+    .box-footer{min-height: 20px;}
+    .done,.done .box-footer{background:#00a65a;color: #fff;}
+    .done .box-title{color: #fff;}
+    .task_description{display: none;}
+    .timeline:before{background:{{color}};}
+</style>
+
+
+<div class="col-md-8" style='padding-top:10px;padding-bottom:10px;background:#efefef;border-radius:5px;border:2px solid #fff;'>
+
+    <ul  class="timeline">
+
+
+
+        <!-- timeline item -->
+        <li ng-repeat="member in project.group_members|filter:query">
+            <!-- timeline icon -->
+            <a href='/user/{{member.details.user_code}}'><img class='pp' src='{{path.image_path}}/{{member.details.profile_picture}}' style='border-radius:50%;'/></a>
+
+            <div class="timeline-item" style="margin-top:-55px;margin-left:80px;" >
+
+                <div  class="panel box box-{{className}} box-solid">
+                    <div class="box-header with-border">
+                        <div class='arrow border-right-{{className}} pull-left'></div>
+                        <h3 ng-click='toggle_body($event)' class="box-title">
+                            <i class='fa fa-tasks'></i> {{member.details.first_name}} {{member.details.last_name}} 's Tasks 
+                        </h3>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="member_body box-body">
+
+                            <div class="row">
+                                <div class="col-md-6" ng-repeat="task in member.details.tasks">
+                                    <div id='TaskBox' class='box  box-{{className}}' ng-if="task.finished == 0">
+                                        <div class="box-header with-border">
+                                            <h3 ng-click="toggle_body($event)" class="box-title">{{task.name}}</h3>
+                                            <div class='pull-right'>
+                                                <div ng-click="markTaskDone(task, member)" class="btn btn-success btn-xs" ng-if="task.user_id == userId"><i class='fa fa-check'></i></div>
+                                                <div class="btn btn-danger btn-xs" ng-click="deleteTask(task, member)" ng-if="project.is_admin"><i class='fa fa-trash-o'></i></div>
+                                            </div>
+                                        </div>
+                                        <div class="task_description box-body">
+                                            <p>
+                                            <div class='qContent'>{{task.description}}</div>
+                                            </p>
+                                        </div>
+                                        <div class="box-footer">
+                                            {{task.taskTime}}
+                                        </div>
+                                    </div>
+                                    <div  class='done box  box-success' ng-if="task.finished == 1">
+                                        <div class="box-header with-border">
+                                            <h3 ng-click="toggle_body($event)" class="box-title">{{task.name}}</h3>
+                                            <div class="btn btn-danger btn-xs pull-right" ng-click="markTaskUnDone(task, member)" ng-if="project.is_admin"><i class='fa fa-share'></i></div>
+                                        </div>
+                                        <div class="task_description box-body">
+                                            <p>
+                                            <div class='qContent'>{{task.description}}</div>
+                                            </p>
+                                        </div>
+                                        <div class="box-footer">
+                                            {{task.taskTime}}
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--
+                            <ul class='list-group'>
+                            <li class='list-group-item' ng-repeat="task in member.details.tasks">
+                                    <blockquote >
+                                            <h3>{{task.name}}</h3>
+                                                                    <p>
+                                                                            <div class='qContent'>{{task.description}}</div>
+                                                                    </p>
+                                        <small>{{task.created_at}}</small>
+                                    </blockquote>
+                                </li>
+                            </ul>
+                            -->
+
+                        </div>
+                        <div class="box-footer off_white">
+
+                            <div ng-if="member.details.tasks.length != 0">
+                                {{member.details.tasksFinished}}  of {{member.details.tasks.length}} Tasks Finished
+                            </div>
+                            <div ng-if="member.details.tasks.length == 0">
+                                No Tasks has been assigned yet.
+                            </div>
+
+                            <div style='background:#ddd;width:100%;border-radius:4px;'>
+                                <div style='border-radius:4px;color:#fff;background:#00a65a;width:{{member.details.tasksFinished / member.details.tasks.length * 100}}%;height:10px;padding: 0px 0px 0px;'>
+                                </div>
+                            </div>
+
+                            Joined Project {{member.groupMemberTime}}
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </li>
+        <li>
+            <i class="fa fa-circle-o bg-{{colorName}}"></i>
+        </li>
+    </ul>
+</div>
+
+<div class="col-md-4" style='padding:0px 5px;'>
+    <div class='box box-solid box-{{className}}'>
+        <div class="box-header">
+            <h3 class="box-title">{{project.name}}</h3>
+        </div>
+        <div class="box-body">
+            <div class="box box-{{className}}" ng-if="project.is_admin">
+                <div class="box-header with-border">
+                    <h5 class="box-title" ng-click='toggle_body($event)'>New Task</h5>
+                </div>
+                <div class="box-body off_white">
+                    <form  name='addTaskForm' novalidate>
+
+                        <input type='text' class='form-control' placeholder='Task Name' ng-model="task.name" name='taskName' required="">
+
+                        <textarea class='form-control' placeholder='Task Description' ng-model='task.description' name='taskDescription' required=""></textarea>
+                        Start Date
+                        <input type='date' class='form-control' name='taskStartDate' ng-model="task.start_at"  required="">
+
+
+                        End Date
+                        <input type='date' class='form-control' ng-model="task.end_at" name='taskEndDate' required="">
+
+
+                        <table id='user_list' border='0' cellspacing='2'>
+                            <tr ng-repeat="user in project.group_members">
+                                <td> <input type='radio' name="taskUserName" ng-model="task.user_id" value="{{user.details.id}}" required=""> </td>
+                                <td><img class='pp' src='{{path.image_path}}/{{user.details.profile_picture}}'/></td>
+                                <td><span>{{user.details.first_name}} {{user.details.last_name}}</span></td>
+
+                            </tr>
+                        </table>
+
+                        <input  type='submit' class='btn btn-block btn-{{className}}' value='Add Task' ng-click="addNewTask(addTaskForm, task)">
+
+                    </form>
+                </div>
+            </div>
+
+            <div class="box box-{{className}}">
+                <div class="box-header with-border">
+                    <h5 class="box-title" ng-click='toggle_body($event)'>Member Search</h5>
+                </div>
+                <div class="box-body off_white">
+                    <input type='text' ng-model='query.details.first_name' class='form-control search-box' placeholder="Type Member Name" >
+
+                </div>
+            </div>
+
+
+            <div class="box box-{{className}}">
+                <div class="box-header with-border">
+                    <h5 class="box-title" ng-click='toggle_body($event)'>Add New Member</h5>
+                </div>
+                <div class="box-body off_white">
+                    <form  name='addMemberForm' novalidate>
+                        <input type='text' class='form-control' placeholder='User Code' ng-model="member.user_code" name='userCode' required="">
+                        <input  type='submit' class='btn btn-block btn-{{className}} btn-flat' value='Add Member' ng-click="addNewMember()">
+                    </form>
+                </div>
+            </div>
+
+            <div class="box box-{{className}}">
+                <div class="box-header">
+                    <h3 class="box-title with-border" ng-click="toggle_body($event)">Project Members</h3>
+
+                </div>
+                <div class="box-body off_white">
+                    <table id='user_list' border='0' style='margin:0px;width:100%' cellspacing='2'>
+                        <tbody ng-repeat="user in project.group_members">
+                            <tr>
+                                <td rowspan='2' style='width:65px;'><img class='pp' src='{{path.image_path}}/{{user.details.profile_picture}}' style='width:50px;height:50px;'/></td>
+                                <td style='height:25px;'><span>{{user.details.first_name}} {{user.details.last_name}}</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div style='background:#ddd;width:100%;border-radius:4px;'>
+                                        <div style='border-radius:4px;color:#fff;background:#00a65a;width:{{user.details.tasksFinished / user.details.tasks.length * 100}}%;height:7px;padding: 0px 0px 0px;'>
+                                        </div>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

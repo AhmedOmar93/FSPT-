@@ -1,0 +1,182 @@
+<style type="text/css">
+    .kok{width: 25px;height: 25px;}
+    .user_name{font-weight: bold;}
+    .box-body{border-color: #fff;}
+    .box{border-width: 0px;}
+    .qContent{margin-left: 0px;}
+    code{
+        background: red;
+    }
+
+</style>
+
+<a  href="#/questions" class='btn btn-{{className}} pull-bottom-5'>&laquo; Back to search</a>
+
+<ul id='answers' class="timeline">
+
+    <!-- timeline time label -->
+    <li class="time-label">
+
+        <span class="bg-{{colorName}}">
+            <i class='fa fa-user'></i> {{question.owner.first_name}} {{question.owner.last_name}}
+        </span>
+    </li>
+    <!-- /.timeline-label -->
+
+    <!-- timeline item -->
+    <li>
+        <!-- timeline icon -->
+        <a href='/user/{{question.owner.user_code}}'><img class='pp' src='{{path.image_path}}/{{question.owner.profile_picture}}' style='border-radius:50%;'/></a>
+
+        <div class="timeline-item" style="margin-top:-60px;" >
+            <div  class="box-body " style='background:transparent;'>
+
+                <div  class="panel box box-{{className}} box-solid">
+                    <div class="box-header with-border">
+                        <div class='arrow border-right-{{className}} pull-left'></div>
+                        <h3  class="box-title">
+                            <div>{{question.title}}</div>
+                        </h3>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="box-body">
+
+                            <blockquote>
+                                <p><div class='qContent' ng-bind-html="question.content"></div></p>
+                                <small>{{question.question_time}}</small>
+                            </blockquote>
+                            <div class='tags' ng-bind-html="question.search_tag | tags">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </li>
+    <!-- END timeline item -->
+
+    <!--
+     <a href='#/questionDetails/{{nextItem}}/0' class='button left-btn'>next</a>
+     <a href='#/questionDetails/{{prevItem}}/0' class='button right-btn'>previous</a> -->
+
+    <!-- /.timeline-label -->
+    <li class="time-label">
+        <span class="bg-{{colorName}}">
+            Answers Number : <span ng-bind-html="answers_loaded"></span> {{answers.length}}
+        </span>
+    </li>
+    <!-- timeline item -->
+    <li ng-repeat=" answer in answers">
+
+        <a href='/user/{{answer.owner.user_code}}'><img class='pp' src='{{path.image_path}}/{{answer.owner.profile_picture}}'/>
+        </a>
+
+        <div class="timeline-item" style='margin-top:-60px;'>
+
+            <div id='answers_content' class="box box-solid">
+                <div  class="box-body">
+                    <div class="box-group" id="accordion">
+                        <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
+                        <div  class="panel box box-{{className}} box-solid ">
+                            <div class="box-header with-border">
+                                <div class='arrow border-right-{{className}} solid pull-left'></div>
+                                <h3 class="box-title">
+                                    {{answer.owner.first_name}} {{answer.owner.last_name}}'s answer 
+                                    <i class=" fa fa-check-circle " ng-if='answer.is_right'></i>
+                                    [ {{answer.rate}} ]
+                                </h3>
+
+                                <div class='pull-right'>
+                                    <div ng-click="mark_right_ans(answer, $event)" ng-if="questionOwner && !answer.is_right" class='btn-success btn btn-sm' ><i class=" fa fa-check"></i>
+                                    </div>
+
+                                    <div ng-if="!answer.checked" ng-click="answer_rate(answer, 0)" class='btn btn-sm btn-danger'>
+                                        <i class="fa fa-fw fa-thumbs-o-down"></i>
+                                    </div>
+                                    <div ng-if="!answer.checked" ng-click="answer_rate(answer, 1)" class='btn btn-sm btn-success'>
+                                        <i class="fa fa-fw fa-thumbs-o-up"></i>
+                                    </div>
+                                    <div ng-if="answer.owner.id == userId"  class='btn btn-danger  btn-sm' ng-click='delete_ans(answer, $event)'>X</div>
+
+
+                                </div>
+
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse in">
+                                <div class="box-body">
+                                    <blockquote>
+                                        <p><div class='qContent' ng-bind-html="answer.content"></div></p>
+                                        <small>{{answer.answer_time}}</small>
+                                    </blockquote>
+                                </div>
+                                <div class='comments'  id='comment_container{{answer.id}}'>
+
+                                    <table style='width:100%;' ng-repeat="comment in answer.comments" border='0'>                    
+                                        <tr>
+                                            <td valign='top' style='padding:0px;width:50px' rowspan='2'><a href='/user/{{comment.owner.user_code}}'><img class='pp-sm' src='{{path.image_path}}/{{comment.owner.profile_picture}}'/><a/></td>
+                                            <td valign='top' style='padding:0px;height:10px;'> <div class='user_name'> {{comment.owner.user_name}} 
+                                                    <div  ng-if="comment.owner.id == userId" class='btn btn-danger btn-xs pull-right' ng-click='delete_com(comment, $event)'>X</div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr style='padding:0px;background:transparent;'>
+                                            <td valign='top' >{{comment.content}}</td>
+                                        </tr>
+
+                                    </table>
+
+                                </div>
+
+
+
+                                <input class='form-control' ng-keyup="add_comment(answer, $event)" type="text" id='comment{{answer.id}}' placeholder='write comment'/>
+                            </div>
+                        </div>
+
+                    </div>
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+        </div>
+    </li>
+
+    <li>
+        <i class='bg-{{colorName}} fa fa-envelope fa-fw'></i>
+
+        <div class="timeline-item" style='margin-top:-5px;'>
+
+            <div class="box box-{{className}} box-solid">
+                <div class="box-header">
+                    <i class="fa fa-envelope"></i>
+                    <div class='arrow border-right-{{className}} pull-left'></div>
+                    <h3 class="box-title">Add Answer</h3>
+                </div>
+                <div class="box-body">
+                    <form name='form'  novalidate>
+                        <div>                     
+                            <textarea class="a_content" placeholder="Question Body" style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" name='acontent' ng-model='answer.content' required=""></textarea>
+                            <div ng-show="form.$submitted || form.acontent.$touched">
+                                <!--
+                                <div class='alert alert-danger' ng-show="form.acontent.$error.required">Write Answer Body</div>
+                                </div>
+                                -->
+                            </div>
+                            <div class="box-footer clearfix">
+                                <button type='submit' ng-click='add_answer(answer, form, question)' class="pull-right btn btn-{{className}}" >Add Answer  <i class="fa fa-arrow-circle-right "></i></button>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li>
+        <i class="fa fa-circle-o bg-{{colorName}}"></i>
+    </li>
+</ul>
+
+<script type="text/javascript">
+            $(document).ready(function () {
+                //bootstrap WYSIHTML5 - text editor
+                $(".a_content").wysihtml5();
+
+            });

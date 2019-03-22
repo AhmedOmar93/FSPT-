@@ -1,0 +1,47 @@
+				<a href='#/addQuestion' class='btn btn-{{className}}' style='width:100%;'>Ask New Question</a>
+				<input type='text' class='form-control' ng-model='query.title' placeholder="search for Questions">
+    <br>
+		<ul>
+			<li class='artist cf' ng-repeat='item in artists |filter:query' ng-init="$last ? doSomething() : null">
+
+        
+				<div  class="panel box box-{{className}} box-solid">
+                      <div class="box-header  with-border">
+                        <h3 class="box-title">
+                          <span style='cursor:pointer;'  ng-click="goTo(item)">
+						                {{item.title}}
+                          </span>
+                        </h3>
+
+                        <div class='pull-right btn btn-danger btn-xs' ng-if="item.owner.id==userId" ng-click='delete_ques(item,$event)' >X</div>
+
+                      </div>
+                      <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="box-body">
+                          <div class="user-panel">
+                            <div class="pull-left image">
+                              <a href='/user/{{item.owner.user_code}}'><img src='{{path.image_path}}/{{item.owner.profile_picture}}' class="pp-lg" style='width:60px;height:60px;'/></a>
+                            </div>
+                            <div class="pull-left info">
+                              <p class='black-text'>{{item.owner.first_name}} {{item.owner.last_name}}</p>
+                              <!-- Status -->
+                              <p class='black-text'><i class="fa  fa-clock-o text-success"></i> {{item.question_time}}</p>
+                          </div>
+                          </div>
+	                        <blockquote>
+                        		<p><div class='qContent' ng-bind-html="item.content "></div>
+                            </p>
+                        	</blockquote style='padding:0px;'>
+                          <i class='fa  fa-tags pull-left' style='margin-top:10px;'></i>
+                          <div class='tags' ng-bind-html="item.search_tag | tags"></div>
+                        	
+                        </div>
+                      </div>
+                    </div>
+			</li>
+
+      
+      <div  class="box-footer text-center">
+                  <a id='get_more_questions' href="javascript::" class="uppercase">view more</a>
+      </div><!-- /.box-footer -->
+		</ul>

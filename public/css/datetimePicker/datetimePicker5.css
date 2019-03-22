@@ -1,0 +1,17 @@
+ #to-do {
+                height: 52px;
+                width: 221px;
+                margin: 30px auto;
+                padding: 91px 0 0 188px;
+            }
+            #to-do .k-datetimepicker {
+                width: 200px;
+            }
+            html.k-material #to-do {
+                height: 55px;
+                width: 260px;
+                padding: 87px 0 0 150px;
+            }
+            html.k-material #to-do .k-datetimepicker {
+                width: 240px;
+            }
